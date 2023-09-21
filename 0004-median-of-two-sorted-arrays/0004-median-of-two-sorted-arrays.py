@@ -5,27 +5,27 @@ class Solution:
         n=n1+n2
         if (n1>n2):
             return self.findMedianSortedArrays(nums2,nums1)
-        partition=(n1+n2)//2
+        partition=(n1+n2+1)//2
 
         if n1==0:
-            return (nums2[n2//2]+nums2[n2//2-1])/2  if n2%2==0 else nums2[n2//2]
+            return (nums2[n2//2]+nums2[n2//2-1])/2 if n2%2==0 else nums2[n2//2]
         if n2==0:
-            return (nums1[n1//2]+nums1[n1//2-1])/2 if n1%2 else nums1[n1//2] 
+            return (nums1[n1//2]+nums1[n1//2-1])/2  if n1%2==0 else nums1[n1//2]
 
         left=0
-        right=n1-1
-        while True:
+        right=n1
+        while(left<=right):
             cut1=(left+right)//2
-            cut2=partition-cut1-2
+            cut2=partition-cut1
 
-            l1= nums1[cut1] if cut1>=0 else float('-inf')
-            l2= nums2[cut2] if cut2>=0 else float('-inf')
+            l1= float('-inf') if cut1==0 else nums1[cut1-1];
+            l2= float('-inf') if cut2==0 else nums2[cut2-1];
 
-            r1= nums1[cut1+1] if (cut1+1)<n1 else float("inf")
-            r2= nums2[cut2+1] if (cut2+1)<n2 else float("inf")
+            r1= float('inf') if cut1>=n1 else nums1[cut1];
+            r2= float('inf') if cut2>=n2 else nums2[cut2];
             
             if (l1<=r2 and l2<=r1):
-                return (max(l1,l2)+min(r1,r2))/2 if n%2==0 else min(r1,r2)
+                return (max(l1,l2)+min(r1,r2))/2 if n%2==0 else max(l1,l2)
             else:
                 if (l1>r2):
                     right=cut1-1
