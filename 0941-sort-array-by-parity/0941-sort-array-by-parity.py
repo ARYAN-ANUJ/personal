@@ -8,6 +8,5 @@ class Solution:
             else:
                 odd.append(i)
 
-        even.sort()
-        odd.sort()
+        
         return even+odd
