@@ -5,7 +5,7 @@ class Solution:
         ans=list()
         for i in nums:
             dic[i]+=1
-        for i in dic.keys():
-            if dic[i]>(len(nums)//3):
-                ans.append(i)
+        for k, v in dic.items():
+            if v > len(nums)//3:
+                ans.append(k)
         return ans
